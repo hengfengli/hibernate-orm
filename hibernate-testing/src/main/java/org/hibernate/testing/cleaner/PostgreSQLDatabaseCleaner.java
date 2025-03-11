@@ -99,7 +99,10 @@ public class PostgreSQLDatabaseCleaner implements DatabaseCleaner {
 			rs = schemasProvider.apply( s );
 			while ( rs.next() ) {
 				String schema = rs.getString( 1 );
-				sqls.add( "DROP SCHEMA \"" + schema + "\" CASCADE" );
+                                if (schema.equals("spanner_sys")) {
+                                  continue;
+                                }
+				sqls.add( "DROP SCHEMA \"" + schema + "\"" );
 				sqls.add( "CREATE SCHEMA \"" + schema + "\"" );
 				sqls.add( "GRANT ALL ON SCHEMA \"" + schema + "\" TO \"" + user + "\"" );
 				List<String> extensions = schemaExtensions.get( schema );
@@ -111,6 +114,7 @@ public class PostgreSQLDatabaseCleaner implements DatabaseCleaner {
 
 			LOG.log( Level.FINEST, "Dropping schema objects: START" );
 			for ( String sql : sqls ) {
+                                LOG.log(Level.INFO, "mytet - statement: " + sql);
 				s.execute( sql );
 			}
 			LOG.log( Level.FINEST, "Dropping schema objects: END" );
@@ -214,17 +218,17 @@ public class PostgreSQLDatabaseCleaner implements DatabaseCleaner {
 
 	// We need this check to differentiate between Postgresql and Cockroachdb
 	private boolean isPostgresql(Connection connection) {
-		try (Statement stmt = connection.createStatement()) {
-			ResultSet rs = stmt.executeQuery( "select version() " );
-			while ( rs.next() ) {
-				String version = rs.getString( 1 );
-				return version.contains( "PostgreSQL" );
-			}
-		}
-		catch (SQLException e) {
-			throw new RuntimeException( e );
-		}
-		return false;
+	//	try (Statement stmt = connection.createStatement()) {
+	//		ResultSet rs = stmt.executeQuery( "select version() " );
+	//		while ( rs.next() ) {
+	//			String version = rs.getString( 1 );
+	//			return version.contains( "PostgreSQL" );
+	//		}
+	//	}
+	//	catch (SQLException e) {
+	//		throw new RuntimeException( e );
+	//	}
+		return true;
 	}
 
 }

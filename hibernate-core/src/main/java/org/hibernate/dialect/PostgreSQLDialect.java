@@ -194,7 +194,8 @@ public class PostgreSQLDialect extends Dialect {
 		switch ( sqlTypeCode ) {
 			case TINYINT:
 				// no tinyint, not even in Postgres 11
-				return "smallint";
+				//return "smallint";
+                                return "bigint";
 
 			// there are no nchar/nvarchar types in Postgres
 			case NCHAR:
@@ -776,7 +777,8 @@ public class PostgreSQLDialect extends Dialect {
 
 	@Override
 	public boolean supportsIfExistsBeforeTableName() {
-		return true;
+		//return false;
+                return true;
 	}
 
 	@Override
@@ -791,7 +793,7 @@ public class PostgreSQLDialect extends Dialect {
 
 	@Override
 	public boolean supportsIfExistsAfterAlterTable() {
-		return true;
+		return false;
 	}
 
 	@Override
