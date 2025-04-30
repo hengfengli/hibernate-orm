@@ -66,6 +66,17 @@ ext {
 //                        'jdbc.datasource' : 'org.postgresql.ds.PGSimpleDataSource',
                         'connection.init_sql' : ''
                 ],
+                spanner_pg : [
+                        'db.dialect' : 'org.hibernate.dialect.PostgreSQLDialect',
+                        'jdbc.driver': 'com.google.cloud.spanner.jdbc.JdbcDriver',
+                        'jdbc.user'  : 'hibernate_orm_test',
+                        'jdbc.pass'  : 'hibernate_orm_test',
+                        // Disable prepared statement caching due to https://www.postgresql.org/message-id/CAEcMXhmmRd4-%2BNQbnjDT26XNdUoXdmntV9zdr8%3DTu8PL9aVCYg%40mail.gmail.com
+                        'jdbc.url'   : 'jdbc:cloudspanner:/projects/test-project/instances/test-instance/databases/hibernate_orm_test',
+                        'jdbc.datasource' : 'com.google.cloud.spanner.jdbc.JdbcDriver',
+//                        'jdbc.datasource' : 'org.postgresql.ds.PGSimpleDataSource',
+                        'connection.init_sql' : ''
+                ],
                 pgsql_ci : [
                         'db.dialect' : 'org.hibernate.dialect.PostgreSQLDialect',
                         'jdbc.driver': 'org.postgresql.Driver',

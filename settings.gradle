@@ -135,6 +135,8 @@ dependencyResolutionManagement {
             library( "micrometer", "io.micrometer", "micrometer-core" ).versionRef( micrometerVersion )
 
             library( "ant", "org.apache.ant", "ant" ).version( "1.8.2" )
+
+            library( "spannerjdbc", "com.google.cloud", "google-cloud-spanner-jdbc" ).version( "2.28.0" )
         }
         jakartaLibs {
             // `jakartaJpaVersion` comes from the local-build-plugins to allow for command-line overriding of the JPA version to use
@@ -245,6 +247,7 @@ dependencyResolutionManagement {
             def sybaseVersion = version "sybase", "1.3.1"
             def tidbVersion = version "tidb", mysqlVersion
             def altibaseVersion = version "altibase", "7.3.0.0.3"
+	    def spannerJdbcVersion = version "spanner_pg", "2.28.0"
 
             library( "h2", "com.h2database", "h2" ).versionRef( h2Version )
             library( "h2gis", "org.orbisgis", "h2gis" ).versionRef( h2gisVersion )
@@ -253,6 +256,7 @@ dependencyResolutionManagement {
             library( "derbyTools", "org.apache.derby", "derbytools" ).versionRef( derbyVersion )
             library( "postgresql", "org.postgresql", "postgresql" ).versionRef( pgsqlVersion )
             library( "cockroachdb", "org.postgresql", "postgresql" ).versionRef( pgsqlVersion )
+            library( "spanner_pg", "com.google.cloud", "google-cloud-spanner-jdbc" ).versionRef( spannerJdbcVersion )
             library( "mysql", "com.mysql", "mysql-connector-j" ).versionRef( mysqlVersion )
             library( "tidb", "com.mysql", "mysql-connector-j" ).versionRef( tidbVersion )
             library( "mariadb", "org.mariadb.jdbc", "mariadb-java-client" ).versionRef( mariadbVersion )
